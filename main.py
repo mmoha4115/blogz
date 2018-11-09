@@ -81,6 +81,9 @@ def eml(field):
         return False
     return True
 
+@app.route('/')
+def blogpage():
+    return redirect('/blog')
 
 @app.before_request
 def require_login():
@@ -157,13 +160,9 @@ def logout():
     del session['email']
     return redirect('/')
 
-#return main page with two links uptop and a title=buildablog and blog title and body of all posts seperated by <hr>
-#links = main and newpost and should be in base.html
-#set all post title when displaying to be hyper link to view post with id included in each one 
 @app.route('/blog')
 def blog():
     posts = Posts.query.all()
-    print(posts,'this is what the blog html is receive = is it what wanted?')
     return render_template('blog.html', posts=posts)
     
 @app.route('/newpost', methods=['POST', 'GET'])
@@ -183,48 +182,20 @@ def newpost():
         if bad_field > 0:
             return render_template('newpost.html', title=title, body=body,title_error=title_error,body_error=body_error)
         owner = User.query.filter_by(email=session['email']).first()
-        print(owner.id,'this is current owner id')
         new_post = Posts(title,body,owner)
         db.session.add(new_post)
         db.session.commit()
-        return redirect('/blog')
-    
+        return render_template('viewpost.html',post_title=title,post_body=body)
     return render_template('newpost.html')
     
-
-#need to add new post into sql and return a page with new post- get id,title,post from file a
-#display add newpost form if method = get # include errors if empty on post=method
-#redirect to viewpost.html  once a post is validated and created
-
-"""@app.route('/newpost', methods=['POST','GET'])
-def index():
-    owner = User.query.filter_by(email = session['email']).first()
-    if request.method == 'POST':
-        post_name = request.form['task']
-        post_title = request.form['title']
-        new_post = Posts(post_name,post_title,owner)
-        db.session.add(new_post)
-        db.session.commit()
-        posts = Posts.query.filter_by(all()
-        #return render_template('blog.html',title="BUILD-A-BLOG", posts=posts)
-
 @app.route('/viewpost')
 def viewpost():
-    v = 2
-    k=22
-
-
-@app.route('/delete-task', methods=['POST'])
-def delete_task():
-
-    task_id = int(request.form['task-id'])
-    task = Task.query.get(task_id)
-    task.completed = True
-    db.session.add(task)
-    db.session.commit()
-
-    return redirect('/')
-"""
+    post_id = request.args.get('post_id')
+    post_id = int(post_id)
+    post = Posts.query.filter_by(id = post_id).first()
+    post_title = post.title
+    post_body = post.body
+    return render_template('viewpost.html',post_title=post_title,post_body=post_body)
 
 if __name__ == '__main__':
     app.run()
