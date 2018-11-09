@@ -25,6 +25,7 @@ class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(120), unique=True)
     password = db.Column(db.String(120))
+
     post = db.relationship('Posts', backref='owner')
 
     def __init__(self, email, password):
@@ -181,6 +182,13 @@ def newpost():
             bad_field += 1
         if bad_field > 0:
             return render_template('newpost.html', title=title, body=body,title_error=title_error,body_error=body_error)
+        owner = User.query.filter_by(email=session['email']).first()
+        print(owner.id,'this is current owner id')
+        new_post = Posts(title,body,owner)
+        db.session.add(new_post)
+        db.session.commit()
+        return redirect('/blog')
+    
     return render_template('newpost.html')
     
 
