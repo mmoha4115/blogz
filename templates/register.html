@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+<div>
+    <a href="./logout">Log Out</a>
+</div>
+
+<h1>Register to Get it done!</h1>
+<form action="/register"  method="POST">
+    <table>
+         <tr>
+              <td><label for="email">Email</label></td>
+             <td><input  type="text" name="email"  value="{{email}}"/>
+            <span class="error">{{email_error}}</span></td>
+          </tr>   
+    <tr>
+    <td><label for="password">Password</label></td>
+    <td><input  type="password" name="password" value="{{password}}" />
+
+    <span class="error">{{password_error}}</span></td>
+    </tr>
+    <tr>
+            <td><label for="verify">Verify Password</label></td>
+            <td><input  type="password" name="verify" value="{{verify}}" />
+                <span class="error">{{verify_error}}</span></td>            
+            </td>
+
+</tr>
+
+    <tr>
+            <td><input  type="submit" name="submit" /></td>
+    </tr>
+
+    </table>
+</form>
+
+
+{% endblock %}
