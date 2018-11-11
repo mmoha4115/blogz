@@ -50,7 +50,7 @@ def eml(field):
         return False
     return True
 
-
+#a good thought but bad if any user is deleted 
 def author():
     username = Users.query.all()
     list_of_users = []

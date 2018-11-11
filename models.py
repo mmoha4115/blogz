@@ -6,11 +6,13 @@ class Posts(db.Model):
     title = db.Column(db.String(120))
     body = db.Column(db.String(500))
     owner_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    author = db.Column(db.String(120))
 
-    def __init__(self, title,body, owner):
+    def __init__(self, title,body, owner,author):
         self.title = title
         self.body = body
         self.owner = owner
+        self.author = author
 
 class Users(db.Model):
 

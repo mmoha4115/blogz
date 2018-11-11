@@ -4,11 +4,14 @@
 <a href="./" style="display:inline-block; margin-right: 20px;">  <h3>All Users</h3></a> 
  <a href="./newpost" style="display:inline-block;">  <h3>Add a blog entry</h3></a> 
 
-<div>
-  <a href="./logout">Log Out</a>
+  <a href="./login" style="display:inline-block; text-align:left; margin-left: 120px;">Log in</a>
+
+  <a href="./logout" style="display:inline-block; text-align:left; margin-left: 20px;">Log Out</a>
+  
 </div> 
 
-<h1 style="text-align:center; color:black;"><strong> {{post_title}}</strong></h1>
-    <h3>{{ post_body}}</h3>
+<h1 style="text-align:center; color:black;"><strong> {{post.title}}</strong></h1>
+    <h3>{{ post.body}}</h3>
+    <h6>Written by <a href="./singleUser?user={{ post.author }}">{{post.author}}</a></h6>
 
     {% endblock %}

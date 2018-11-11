@@ -1,9 +1,20 @@
 {% extends "base.html" %}
 
 {% block content %}
-<ul>
-{% for name in all_names %}
-<li><h1> {{ name }}</h1></li>
+<a href="./blog" style="display:inline-block; margin-right: 20px;"><h3>All posts </h3></a> 
+<a href="./" style="display:inline-block; margin-right: 20px;">  <h3>All Users</h3></a> 
+ <a href="./newpost" style="display:inline-block;">  <h3>Add a blog entry</h3></a> 
+
+  <a href="./login" style="display:inline-block; text-align:left; margin-left: 120px;">Log in</a>
+
+  <a href="./logout" style="display:inline-block; text-align:left; margin-left: 20px;">Log Out</a>
+  
+{% for post in posts %}
+<a href="/viewpost?post_id={{ post.id }}" ><h2><strong>{{ post.title }}</strong></h2></a>
+{{ post.body }}
+{{post.ownerid}}
+<h6>Written by <a href="./singleUser?user={{ post.author }}">{{post.author}}</a></h6>
+<hr />
 {% endfor %}
-</ul>
+
 {% endblock %}

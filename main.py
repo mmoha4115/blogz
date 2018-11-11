@@ -5,9 +5,9 @@ from functions import use_pass, empty, author
 
 @app.before_request
 def require_login():
-    allowed_routes = ['login', 'register','blog']
+    allowed_routes = ['login', 'register','blog','index','singleUser','viewpost']
     if request.endpoint not in allowed_routes and 'user' not in session:
-        return redirect('/login')
+        return redirect('/')
 
 @app.route('/login', methods=['POST', 'GET'])
 def login():
@@ -76,7 +76,6 @@ def logout():
 @app.route('/blog')
 def blog():
     posts = Posts.query.all()
-
     return render_template('blog.html', posts=posts)
     
 @app.route('/newpost', methods=['POST', 'GET'])
@@ -96,10 +95,11 @@ def newpost():
         if bad_field > 0:
             return render_template('newpost.html', title=title, body=body,title_error=title_error,body_error=body_error)
         owner = Users.query.filter_by(user=session['user']).first()
-        new_post = Posts(title,body,owner)
+        author = session['user']
+        new_post = Posts(title,body,owner,author)
         db.session.add(new_post)
         db.session.commit()
-        return render_template('viewpost.html',post_title=title,post_body=body)
+        return render_template('viewpost.html',post=new_post)
     return render_template('newpost.html')
     
 @app.route('/viewpost')
@@ -109,19 +109,26 @@ def viewpost():
     post = Posts.query.filter_by(id = post_id).first()
     post_title = post.title
     post_body = post.body
-    return render_template('viewpost.html',post_title=post_title,post_body=post_body)
+    post_author = post.author
+    return render_template('viewpost.html',post=post)
 
 
-@app.route('/', methods=['GET','POST'])
+@app.route('/') #, methods=['GET','POST']
 def index():
     users = Users.query.all()
     return render_template('index.html',users = users)
 
-@app.route('/singleUser')
+@app.route('/index')
+def reroute():
+    return redirect('/')
+
+@app.route('/singleUser', methods=['GET','POST'])
 def singleUser():
-    all_names = author()
-    print(all_names,'alll namessssss')
-    return render_template('singleUser.html', all_names=all_names)
+    if request.method == 'GET':
+        user = request.args.get('user')
+        posts = Posts.query.filter_by(author=user).all()
+        return render_template('singleUser.html',posts=posts)
+    return redirect('/blog')
 
 if __name__ == '__main__':
     app.run()
