@@ -1,5 +1,4 @@
 from models import Users,Posts
-from app import app , db, request, redirect, render_template, session, flash
 
 #functions to validate length, spaces, empty field, and '@' and '.' in email
 def length(field):
@@ -58,7 +57,6 @@ def author():
         list_of_users.append(user.user)
         print(user.user)
     return list_of_users
-
 
 
 

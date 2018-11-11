@@ -7,6 +7,14 @@
   
     </head>
 <body>
+        <a href="./blog" style="display:inline-block; margin-right: 20px;"><h3>All posts </h3></a> 
+        <a href="./" style="display:inline-block; margin-right: 20px;">  <h3>All Users</h3></a> 
+         <a href="./newpost" style="display:inline-block;">  <h3>Add a blog entry</h3></a> 
+        
+          <a href="./login" style="display:inline-block; text-align:left; margin-left: 120px;">Log in</a>
+        
+          <a href="./logout" style="display:inline-block; text-align:left; margin-left: 20px;">Log Out</a>
+
     {% with messages = get_flashed_messages(with_categories=True) %}
     <ul>
         {% for category,message in messages %}

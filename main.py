@@ -1,13 +1,12 @@
 from models import Users,Posts
 from app import app , db, request, redirect, render_template, session, flash
 from functions import use_pass, empty, author
-#app.secret_key = 'y337kGcys&zP3B'
 
 @app.before_request
 def require_login():
-    allowed_routes = ['login', 'register','blog','index','singleUser','viewpost']
+    allowed_routes = ['login', 'register','blog','singleUser','viewpost','/','index','http://localhost:5000/']
     if request.endpoint not in allowed_routes and 'user' not in session:
-        return redirect('/')
+        return redirect('/login')
 
 @app.route('/login', methods=['POST', 'GET'])
 def login():
@@ -75,7 +74,7 @@ def logout():
 
 @app.route('/blog')
 def blog():
-    posts = Posts.query.all()
+    posts = Posts.query.order_by(Posts.title).all()
     return render_template('blog.html', posts=posts)
     
 @app.route('/newpost', methods=['POST', 'GET'])
@@ -100,8 +99,11 @@ def newpost():
         db.session.add(new_post)
         db.session.commit()
         return render_template('viewpost.html',post=new_post)
-    return render_template('newpost.html')
-    
+    if session['user']:
+        return render_template('newpost.html')
+    else:
+        return redirect('/login')
+
 @app.route('/viewpost')
 def viewpost():
     post_id = request.args.get('post_id')
@@ -112,15 +114,10 @@ def viewpost():
     post_author = post.author
     return render_template('viewpost.html',post=post)
 
-
 @app.route('/') #, methods=['GET','POST']
 def index():
     users = Users.query.all()
     return render_template('index.html',users = users)
-
-@app.route('/index')
-def reroute():
-    return redirect('/')
 
 @app.route('/singleUser', methods=['GET','POST'])
 def singleUser():
@@ -132,9 +129,7 @@ def singleUser():
 
 if __name__ == '__main__':
     app.run()
-
-
-
+#index ie '/' - need to know how to add to before request need to redirect to log in if not logged in  and top solved solves bottom
 
 
 
