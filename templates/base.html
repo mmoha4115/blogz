@@ -2,11 +2,14 @@
 <html>
 <head>
     <title>{{title}} </title>
- <link rel="stylesheet" type= "text/css" href="/static/styles/main.css">
-    
+ <!--<link rel="stylesheet" type= "text/css" href="/static/styles/main.css">-->
+    <style>
+    error {
+    color: green;
+}
+    </style>
     </head>
 <body>
-<!--
     {% with messages = get_flashed_messages(with_categories=True) %}
     <ul>
         {% for category,message in messages %}
@@ -14,8 +17,9 @@
         {% endfor %}
     </ul>
     {% endwith %}
--->
+
     {%  block content%}
+
     {% endblock %}
 </body>
 </html>

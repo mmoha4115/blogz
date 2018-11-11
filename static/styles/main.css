@@ -1,8 +1,8 @@
-.error{
+error{
     color: green;
 }
 
-div {
+body {
     background-color: blue;
     color: brown;
 }

@@ -1,14 +1,17 @@
 {% extends "base.html" %}
-{%  block content%}
+
+{% block content %}
 <a href="./blog" style="display:inline-block; margin-right: 20px;"><h3>All posts </h3></a> 
 <a href="./" style="display:inline-block; margin-right: 20px;">  <h3>All Users</h3></a> 
  <a href="./newpost" style="display:inline-block;">  <h3>Add a blog entry</h3></a> 
 
 <div>
   <a href="./logout">Log Out</a>
-</div> 
+</div>
 
-<h1 style="text-align:center; color:black;"><strong> {{post_title}}</strong></h1>
-    <h3>{{ post_body}}</h3>
+<h1>All users!</h1>
+{% for user in users %}
+<h2>{{user.user}}</h2>
 
-    {% endblock %}
+{% endfor %}
+{% endblock %}
