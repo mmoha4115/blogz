@@ -1,4 +1,7 @@
 from models import Users,Posts
+import hashlib
+import random
+import string
 
 #functions to validate length, spaces, empty field, and '@' and '.' in email
 def length(field):
@@ -58,9 +61,21 @@ def author():
         print(user.user)
     return list_of_users
 
+def make_salt():
+    return ''.join([random.choice(string.ascii_letters) for x in range(5)])
+
+def hash_pwd(password, salt=None):
+    if not salt:
+        salt = make_salt()
+    hash = hashlib.sha256(str.encode(password + salt)).hexdigest()
+    return '{0},{1}'.format(hash,salt)
 
 
-
+def pw_validate_hash(hash,pw):
+    salt = hash.split(',')[1]
+    if hash_pwd(pw,salt) ==  hash:
+        return True
+    return False
 
 
 

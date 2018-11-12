@@ -1,10 +1,10 @@
 from models import Users,Posts
 from app import app , db, request, redirect, render_template, session, flash
-from functions import use_pass, empty, author
+from functions import use_pass, empty, author,hash_pwd,pw_validate_hash
 
 @app.before_request
 def require_login():
-    allowed_routes = ['login', 'register','blog','singleUser','viewpost','/','index','http://localhost:5000/']
+    allowed_routes = ['login', 'register','blog','singleUser','viewpost','index']
     if request.endpoint not in allowed_routes and 'user' not in session:
         return redirect('/login')
 
@@ -14,7 +14,7 @@ def login():
         user = request.form['user']
         password = request.form['password']       
         username = Users.query.filter_by(user=user).first()
-        if username and username.password == password:
+        if username and pw_validate_hash(username.password,password):
             session['user'] = user
             flash('Logged In', 'error')
             return redirect('/')
@@ -57,6 +57,7 @@ def register():
         # TODO - validate user's data
         existing_user = Users.query.filter_by(user=user).first()
         if not existing_user:
+            password = hash_pwd(password)
             new_user = Users(user, password)
             db.session.add(new_user)
             db.session.commit()
@@ -74,7 +75,9 @@ def logout():
 
 @app.route('/blog')
 def blog():
-    posts = Posts.query.order_by(Posts.title).all()
+    page = request.args.get('page',1,type=int)
+    posts = Posts.query.order_by(Posts.id.desc()).paginate(page=page,per_page=5)
+    #posts = Posts.query.order_by(Posts.title).all()
     return render_template('blog.html', posts=posts)
     
 @app.route('/newpost', methods=['POST', 'GET'])
@@ -123,13 +126,13 @@ def index():
 def singleUser():
     if request.method == 'GET':
         user = request.args.get('user')
-        posts = Posts.query.filter_by(author=user).all()
-        return render_template('singleUser.html',posts=posts)
+        page = request.args.get('page',1,type=int)
+        posts = Posts.query.order_by(Posts.id.desc()).filter_by(author=user).paginate(page=page,per_page=5)
+        return render_template('singleUser.html',posts=posts,user=user)
     return redirect('/blog')
 
 if __name__ == '__main__':
     app.run()
-#index ie '/' - need to know how to add to before request need to redirect to log in if not logged in  and top solved solves bottom
 
 
 
