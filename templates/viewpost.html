@@ -4,6 +4,6 @@
 
 <h1 style="text-align:center; color:black;"><strong> {{post.title}}</strong></h1>
     <h3>{{ post.body}}</h3>
-    <h6>Written by <a href="./singleUser?user={{ post.author }}">{{post.author}}</a></h6>
+    <h6>Written by <a href="./singleUser?user={{ post.author }}">{{post.author}} </a> on {{post.pub_date}}.</h6>
 
     {% endblock %}

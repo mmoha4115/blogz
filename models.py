@@ -1,4 +1,5 @@
 from app import db
+from datetime import datetime
 
 class Posts(db.Model):
 
@@ -7,12 +8,16 @@ class Posts(db.Model):
     body = db.Column(db.String(500))
     owner_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     author = db.Column(db.String(120))
+    pub_date = db.Column(db.DateTime)
 
-    def __init__(self, title,body, owner,author):
+    def __init__(self, title,body, owner,author,pub_date=None):
         self.title = title
         self.body = body
         self.owner = owner
         self.author = author
+        if pub_date is None:
+            pub_date = datetime.utcnow()
+        self.pub_date = pub_date
 
 class Users(db.Model):
 

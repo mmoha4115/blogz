@@ -1,12 +1,13 @@
 {% extends "base.html" %}
 
 {% block content %}
+<div class="text-center"><h1>All posts by {{user}}</h1></div>
   
    {% for post in posts.items %}
   <a href="/viewpost?post_id={{ post.id }}" ><h2><strong>{{ post.title }}</strong></h2></a>
    {{ post.body }}
    {{post.ownerid}}
-   <h6>Written by <a href="./singleUser?user={{ post.author }}">{{post.author}}</a></h6>   
+   <h6>Written by <a href="./singleUser?user={{ post.author }}">{{post.author}} </a> on {{post.pub_date}}.</h6>   
    <hr />
    {% endfor %}
    {% for page_num in posts.iter_pages(left_edge=1,right_edge=1,left_current=1,right_current=2) %}

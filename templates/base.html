@@ -4,16 +4,39 @@
     <title>{{title}} </title>
 
     <link rel="stylesheet" type= "text/css" href="/static/styles/main.css">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   
     </head>
 <body>
-        <a href="./blog" style="display:inline-block; margin-right: 20px;"><h3>All posts </h3></a> 
+<div class="container">
+        
+        <div class="container">
+                <ul class="nav navbar-nav">
+                  <li class="active"><a href="./">Home</a></li>
+                  <li class="dropdown"><a  href="./blog">Posts</a>
+                  </li>
+                  <li><a href="./newpost">Newpost</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                  <li><a href="./register"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+                  <li><a href="./login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                </ul>
+              </div>
+            </nav>
+          </div>
+
+        <!-- <a href="./blog" style="display:inline-block; margin-right: 20px;"><h3>All posts </h3></a> 
         <a href="./" style="display:inline-block; margin-right: 20px;">  <h3>All Users</h3></a> 
          <a href="./newpost" style="display:inline-block;">  <h3>Add a blog entry</h3></a> 
         
           <a href="./login" style="display:inline-block; text-align:left; margin-left: 120px;">Log in</a>
         
-          <a href="./logout" style="display:inline-block; text-align:left; margin-left: 20px;">Log Out</a>
+          <a href="./logout" style="display:inline-block; text-align:left; margin-left: 20px;">Log Out</a> -->
 
     {% with messages = get_flashed_messages(with_categories=True) %}
     <ul>
@@ -26,5 +49,6 @@
     {%  block content%}
 
     {% endblock %}
+  </div>
 </body>
 </html>
