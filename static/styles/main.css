@@ -1,5 +1,24 @@
-error{
-    color: green;
+#blog{
+background-color: rgb(133, 255, 214)
+}
+#index{
+background-color: rgb(255, 131, 131)
+}
+#login{
+background-color: rgb(132, 251, 255)
+}
+#newpost{
+background-color: rgb(255, 179, 179)
+}
+#register{
+background-color: rgb(100, 211, 255)
+}
+#singleUser{
+    background-color: rgb(152, 151, 255)
+
+}
+#viewpost{
+    background-color: rgb(202, 255, 142)
 }
 
 

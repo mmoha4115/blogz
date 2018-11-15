@@ -62,6 +62,7 @@ def register():
             db.session.add(new_user)
             db.session.commit()
             session['user'] = user
+            flash('Logged In', 'error')
             return redirect('/')
         else:
             # TODO - user better response messaging
@@ -71,6 +72,7 @@ def register():
 @app.route('/logout')
 def logout():
     del session['user']
+    flash('LOGGED OUT', 'error')
     return redirect('/')
 
 @app.route('/blog')

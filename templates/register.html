@@ -2,36 +2,30 @@
 
 
 {% block content %}
+<div class="container" id="register">
+    <h2>Register to Blogz</h2>
+    <form action="/register"  method="POST">
+        <div class="form-group">
+        <label for="email">Username:</label>
+        <input type="text" class="form-control" id="email" placeholder="Enter username" name="user">
+        <span class="alert-danger">{{user_error}}</span></td>
 
+      </div>
+      <div class="form-group">
+        <label for="password">Password:</label>
+        <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="password" value="{{password}}">
+        <span class="alert-danger">{{password_error}}</span></td>
+      </div>
 
-<h1>Register to Blogz</h1>
-<form action="/register"  method="POST">
-    <table>
-         <tr>
-              <td><label for="user">Username</label></td>
-             <td><input  type="text" name="user"  value="{{user}}"/>
-            <span class="error">{{user_error}}</span></td>
-          </tr>   
-    <tr>
-    <td><label for="password">Password</label></td>
-    <td><input  type="password" name="password" value="{{password}}" />
-
-    <span class="error">{{password_error}}</span></td>
-    </tr>
-    <tr>
-            <td><label for="verify">Verify Password</label></td>
-            <td><input  type="password" name="verify" value="{{verify}}" />
-                <span class="error">{{verify_error}}</span></td>            
-            </td>
-
-</tr>
-
-    <tr>
-            <td><input  type="submit" name="Register" /></td>
-    </tr>
-
-    </table>
-</form>
-
-
+      <div class="form-group">
+        <label for="verify">Verify Password:</label>
+        <input type="password" class="form-control" id="pwd" placeholder="Verify password" name="verify" value="{{verify}}">
+        <span class="alert-danger">{{verify_error}}</span></td>            
+      </div>
+      <div>
+      <button type="submit" class="btn btn-default">Register</button>
+    </div>
+    </form>
+  </div>
+  
 {% endblock %}

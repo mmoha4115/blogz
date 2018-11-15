@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 
-{% block content %}
+{% block content %}  
+ <div id="singleUser">
 <div class="text-center"><h1>All posts by {{user}}</h1></div>
   
    {% for post in posts.items %}
@@ -13,11 +14,12 @@
    {% for page_num in posts.iter_pages(left_edge=1,right_edge=1,left_current=1,right_current=2) %}
    {%if page_num %}
     {% if posts.page == page_num %}
-        <a  class="btn btn-info mb-4" href="{{ url_for('singleUser',user=user,page=page_num)}}">{{ page_num }}</a>
+        <a  class="btn btn-danger mb-4" href="{{ url_for('singleUser',user=user,page=page_num)}}">{{ page_num }}</a>
    {% else %}
-        <a  class="btn btn-outline-info mb-4" href="{{ url_for('singleUser',user=user,page=page_num)}}">{{ page_num }}</a>
+        <a  class="btn btn-info mb-4" href="{{ url_for('singleUser',user=user,page=page_num)}}">{{ page_num }}</a>
    {% endif %}
 
    {% endif %}
    {% endfor %}
+</div>
 {% endblock %}
