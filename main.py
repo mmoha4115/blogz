@@ -133,6 +133,9 @@ def singleUser():
         return render_template('singleUser.html',posts=posts,user=user)
     return redirect('/blog')
 
+@app.route('/ajax')
+def ajax():
+    return render_template('ajindex.html')
 if __name__ == '__main__':
     app.run()
 
