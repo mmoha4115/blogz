@@ -11,7 +11,7 @@ function loadData() {
 // google street view api
   $greeting.text('So you want to live at '+address);
   var sig = 'BAwytdnPPWjLSzuOyDJMN37WF6c=';
-  var key = 'AIzaSyDAhXzmx1PMU7WOLfDUdTF3asXEDmBWXs0';
+  var key = '00022';
   var url ='http://maps.googleapis.com/maps/api/streetview?size=600x300&location='+address+'&key=AIzaSyDAhXzmx1PMU7WOLfDUdTF3asXEDmBWXs0 ';
   $('body').append("<img class ='bgimg' src='"+url+"'>");
   // clear out old data before new request
