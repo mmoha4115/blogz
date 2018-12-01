@@ -1,11 +1,16 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Your Moving Companion</title>
     <link rel="stylesheet" href="static/styles/style.css">
 </head>
-<body>
+<body> -->
+        {% extends "base.html" %}
+
+        {% block content %}
+        title = "address information using ajax with api"
+      
 
     <form id="form-container" class="form-container">
         <label for="street">Street: </label><input type="text" id="street" value="">
@@ -26,10 +31,13 @@
 
     <div class="nytimes-container">
         <h3 id="nytimes-header">New York Times Articles</h3>
-        <ul id="nytimes-articles" class="article-list">What's going on in your new city? Enter an address and hit submit and the NY Times will tell you here!</ul>
+        <ul id="nytimes-articles" class="article-list">What's going on in your new city? Enter an address and hit submit and 
+            the NY Times will tell you here!</ul>
     </div>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="static/js/script.js"></script>
-</body>
-</html>
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="static/js/script.js"></script>  -->
+    
+
+    {% endblock %}
+
